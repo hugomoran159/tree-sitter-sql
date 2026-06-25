@@ -146,7 +146,7 @@ export default {
             optional($.keyword_distinct),
             field(
               'parameter',
-              $.term,
+              choice($.named_argument, $.term),
             ),
             optional($.order_by)
           )
@@ -180,6 +180,13 @@ export default {
         $.filter_expression
       )
     ),
+  ),
+
+  // DuckDB named/keyword function arguments: name := expr  /  name => expr
+  named_argument: $ => seq(
+    field('arg_name', $.identifier),
+    choice(':=', '=>'),
+    field('value', $._expression),
   ),
 
   filter_expression : $ => seq(

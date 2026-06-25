@@ -162,6 +162,7 @@ export default {
   keyword_permissive: _ => make_keyword("permissive"),
   keyword_restrictive: _ => make_keyword("restrictive"),
   keyword_exclude: _ => make_keyword("exclude"),
+  keyword_qualify: _ => make_keyword("qualify"),
   keyword_current: _ => make_keyword("current"),
   keyword_row: _ => make_keyword("row"),
   keyword_ties: _ => make_keyword("ties"),

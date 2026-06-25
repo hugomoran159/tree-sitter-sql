@@ -99,6 +99,25 @@ export default {
       ),
     ),
     '*',
+    optional($.exclude_clause), // DuckDB
+    optional($.replace_clause), // DuckDB
+  ),
+
+  // DuckDB: SELECT * EXCLUDE (a, b)  /  SELECT * EXCLUDE a
+  exclude_clause: $ => seq(
+    $.keyword_exclude,
+    choice(
+      $._column,
+      seq('(', comma_list($._column, true), ')'),
+    ),
+  ),
+
+  // DuckDB: SELECT * REPLACE (expr AS col, ...)
+  replace_clause: $ => seq(
+    $.keyword_replace,
+    '(',
+    comma_list(seq($._expression, $.keyword_as, $._column), true),
+    ')',
   ),
 
   partition_by: $ => seq(
@@ -223,6 +242,7 @@ export default {
     optional($.group_by),
     optional($.having),
     optional($.window_clause),
+    optional($.qualify), // DuckDB / standard
     optional($.order_by),
     optional($.limit),
   ),
@@ -389,6 +409,12 @@ export default {
 
   having: $ => seq(
     $.keyword_having,
+    $._expression,
+  ),
+
+  // DuckDB / standard: QUALIFY <condition> (filter on window-function results)
+  qualify: $ => seq(
+    $.keyword_qualify,
     $._expression,
   ),
 

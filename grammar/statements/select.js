@@ -32,22 +32,24 @@ export default {
     ),
   ),
 
-  set_operation: $ => seq(
+  set_operation: $ => prec.left(seq(
     $._select_statement,
     repeat1(
       seq(
         field(
           "operation",
           choice(
-            seq($.keyword_union, optional($.keyword_all)),
-            $.keyword_except,
-            $.keyword_intersect,
+            seq($.keyword_union, optional($.keyword_all), optional(seq($.keyword_by, $.keyword_name))),
+            seq($.keyword_except, optional($.keyword_all)),
+            seq($.keyword_intersect, optional($.keyword_all)),
           ),
         ),
         $._select_statement,
       ),
     ),
-  ),
+    optional($.order_by),
+    optional($.limit),
+  )),
 
   _select_statement: $ => optional_parenthesis(
     seq(

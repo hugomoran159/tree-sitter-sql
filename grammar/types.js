@@ -47,6 +47,11 @@ export default {
 
         $.enum,
 
+        $.struct_type,
+        $.map_type,
+        $.union_type,
+        $.list_type,
+
         $.keyword_date,
         $.keyword_datetime,
         $.keyword_datetime2,
@@ -152,6 +157,30 @@ export default {
     $.keyword_enum,
     paren_list(field("value", alias($._literal_string, $.literal)), true)
   ),
+
+  struct_type: $ => prec(1, seq(
+    choice($.keyword_struct, $.keyword_row),
+    wrapped_in_parenthesis(
+      comma_list(seq(field('field', $.identifier), $._type), true),
+    ),
+  )),
+
+  map_type: $ => prec(1, seq(
+    $.keyword_map,
+    wrapped_in_parenthesis(seq($._type, ',', $._type)),
+  )),
+
+  union_type: $ => prec(1, seq(
+    $.keyword_union,
+    wrapped_in_parenthesis(
+      comma_list(seq(field('field', $.identifier), $._type), true),
+    ),
+  )),
+
+  list_type: $ => prec(1, seq(
+    $.keyword_list,
+    wrapped_in_parenthesis($._type),
+  )),
 
   array: $ => seq(
     $.keyword_array,

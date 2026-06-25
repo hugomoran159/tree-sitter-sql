@@ -15,6 +15,7 @@ import copy_rules from "./copy.js";
 import select_rules from "./select.js";
 import set_rules from "./set.js";
 import refresh_rules from "./refresh.js";
+import pragma_rules from "./pragma.js";
 
 export default {
 
@@ -84,6 +85,7 @@ export default {
     $.comment_statement,
     $.set_statement,
     $.reset_statement,
+    $.pragma_statement,
   ),
 
   ...create_rules,
@@ -93,6 +95,7 @@ export default {
   ...optimize_rules,
   ...merge_rules,
   ...refresh_rules,
+  ...pragma_rules,
   ...comment_rules,
 
   _dml_write: $ => seq(

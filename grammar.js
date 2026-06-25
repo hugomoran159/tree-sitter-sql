@@ -30,6 +30,8 @@ export default grammar({
     [$.between_expression, $.binary_expression],
     [$.time],
     [$.timestamp],
+    [$.all_fields], // DuckDB: * EXCLUDE/REPLACE clause vs trailing alias
+    [$.pragma_statement], // PRAGMA name vs PRAGMA name(args)
   ],
 
   precedences: $ => [

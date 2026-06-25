@@ -1,4 +1,4 @@
-import { optional_parenthesis, paren_list, wrapped_in_parenthesis } from "./helpers.js";
+import { optional_parenthesis, paren_list, wrapped_in_parenthesis, comma_list } from "./helpers.js";
 
 export default {
 
@@ -11,6 +11,8 @@ export default {
       ),
       $.parameter,
       $.list,
+      $.list_literal,
+      $.struct_literal,
       $.case,
       $.window_function,
       $.subquery,
@@ -361,6 +363,12 @@ export default {
   ),
 
   list: $ => paren_list($._expression),
+
+  // DuckDB list literal: [1, 2, 3]
+  list_literal: $ => seq('[', comma_list($._expression), ']'),
+
+  // DuckDB struct / map literal: {'a': 1, 'b': 2}
+  struct_literal: $ => seq('{', comma_list(seq($._expression, ':', $._expression)), '}'),
 
   literal: $ => prec(2,
     choice(

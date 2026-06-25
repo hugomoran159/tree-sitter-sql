@@ -429,22 +429,20 @@ export default {
   order_target: $ => seq(
     $._expression,
     optional(
-      seq(
-        choice(
-          $.direction,
-          seq(
-            $.keyword_using,
-            choice('<', '>', '<=', '>='),
-          ),
+      choice(
+        $.direction,
+        seq(
+          $.keyword_using,
+          choice('<', '>', '<=', '>='),
         ),
-        optional(
-          seq(
-            $.keyword_nulls,
-            choice(
-              $.keyword_first,
-              $.keyword_last,
-            ),
-          ),
+      ),
+    ),
+    optional(
+      seq(
+        $.keyword_nulls,
+        choice(
+          $.keyword_first,
+          $.keyword_last,
         ),
       ),
     ),

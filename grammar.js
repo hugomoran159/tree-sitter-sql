@@ -32,6 +32,8 @@ export default grammar({
     [$.timestamp],
     [$.all_fields], // DuckDB: * EXCLUDE/REPLACE clause vs trailing alias
     [$.pragma_statement], // PRAGMA name vs PRAGMA name(args)
+    [$.transaction, $.block, $.transaction_statement], // BEGIN block vs standalone BEGIN/COMMIT/ROLLBACK
+    [$.transaction, $.transaction_statement], // BEGIN TRANSACTION block vs standalone
   ],
 
   precedences: $ => [
@@ -62,6 +64,7 @@ export default grammar({
         seq(
           choice(
             $.transaction,
+            $.transaction_statement,
             $.statement,
             $.block,
           ),
@@ -70,7 +73,10 @@ export default grammar({
       ),
       // optionally, a single statement without a terminating ;
       optional(
-        $.statement,
+        choice(
+          $.statement,
+          $.transaction_statement,
+        ),
       ),
     ),
 

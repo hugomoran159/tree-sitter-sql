@@ -1,5 +1,15 @@
 export default {
 
+  transaction_statement: $ => choice(
+    seq(
+      choice($.keyword_begin, $.keyword_start),
+      optional($.keyword_transaction),
+    ),
+    $._commit,
+    $._rollback,
+    $.keyword_abort,
+  ),
+
   transaction: $ => seq(
     $.keyword_begin,
     optional(

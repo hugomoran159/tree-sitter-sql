@@ -146,6 +146,7 @@ export default {
   keyword_commit: _ => make_keyword("commit"),
   keyword_rollback: _ => make_keyword("rollback"),
   keyword_transaction: _ => make_keyword("transaction"),
+  keyword_abort: _ => make_keyword("abort"),
   keyword_over: _ => make_keyword("over"),
   keyword_nulls: _ => make_keyword("nulls"),
   keyword_first: _ => make_keyword("first"),

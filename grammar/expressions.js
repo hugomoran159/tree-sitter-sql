@@ -28,8 +28,17 @@ export default {
       $.between_expression,
       $.parenthesized_expression,
       $.object_id,
+      $.lambda,
     )
   ),
+
+  // DuckDB lambda (colon form): lambda x: expr / lambda x, y: expr
+  lambda: $ => prec.right(seq(
+    $.keyword_lambda,
+    comma_list($.identifier, true),
+    ':',
+    field('body', $._expression),
+  )),
 
     object_reference: $ => choice(
       seq(

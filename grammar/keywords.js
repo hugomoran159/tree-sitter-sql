@@ -430,4 +430,6 @@ export default {
 
   keyword_array: _ => make_keyword("array"), // not included in _type since it's a constructor literal
 
+  keyword_lambda: _ => make_keyword("lambda"),
+
 }

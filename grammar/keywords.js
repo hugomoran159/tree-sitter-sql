@@ -88,6 +88,7 @@ export default {
   keyword_enable: _ => make_keyword("enable"),
   keyword_disable: _ => make_keyword("disable"),
   keyword_force: _ => make_keyword("force"),
+  keyword_checkpoint: _ => make_keyword("checkpoint"),
   keyword_ignore: _ => make_keyword("ignore"),
   keyword_using: _ => make_keyword("using"),
   keyword_use: _ => make_keyword("use"),

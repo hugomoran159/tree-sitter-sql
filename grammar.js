@@ -34,6 +34,7 @@ export default grammar({
     [$.pragma_statement], // PRAGMA name vs PRAGMA name(args)
     [$.transaction, $.block, $.transaction_statement], // BEGIN block vs standalone BEGIN/COMMIT/ROLLBACK
     [$.transaction, $.transaction_statement], // BEGIN TRANSACTION block vs standalone
+    [$.from], // relation index_hint (FORCE) vs trailing FORCE CHECKPOINT statement
   ],
 
   precedences: $ => [

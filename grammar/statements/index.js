@@ -86,6 +86,13 @@ export default {
     $.set_statement,
     $.reset_statement,
     $.pragma_statement,
+    $.checkpoint_statement,
+  ),
+
+  checkpoint_statement: $ => seq(
+    optional($.keyword_force),
+    $.keyword_checkpoint,
+    optional($.object_reference),
   ),
 
   ...create_rules,

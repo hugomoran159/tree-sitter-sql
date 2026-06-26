@@ -39,6 +39,7 @@ export default {
   keyword_asc: _ => make_keyword("asc"),
   keyword_limit: _ => make_keyword("limit"),
   keyword_offset: _ => make_keyword("offset"),
+  keyword_percent: _ => make_keyword("percent"),
   keyword_primary: _ => make_keyword("primary"),
   keyword_create: _ => make_keyword("create"),
   keyword_alter: _ => make_keyword("alter"),

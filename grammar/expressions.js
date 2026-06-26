@@ -269,6 +269,7 @@ export default {
       ['%', 'binary_times'],
       ['^', 'binary_exp'],
       ['=', 'binary_relation'],
+      ['==', 'binary_relation'],
       ['<', 'binary_relation'],
       ['<=', 'binary_relation'],
       ['!=', 'binary_relation'],
